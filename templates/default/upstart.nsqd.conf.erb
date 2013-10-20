@@ -1,0 +1,42 @@
+description "nsqd"
+
+start on runlevel [2345]
+stop on runlevel [!2345]
+
+limit nofile <%= node['nsq']['nsqd']['filehandle_limit'] %> <%= node['nsq']['nsqd']['filehandle_limit'] %>
+limit nproc <%= node['nsq']['nsqd']['nproc'] %> <%= node['nsq']['nsqd']['nproc'] %>
+
+env PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/sbin:/bin
+
+respawn
+
+script
+  set -e
+  mkfifo /tmp/nsqd-log-fifo
+  ( logger -t nsqd </tmp/nsqd-log-fifo & )
+  exec >/tmp/nsqd-log-fifo
+  rm /tmp/nsqd-log-fifo
+
+  exec su -s /bin/sh -c 'exec "$0" "$@"' nsqd -- /usr/local/bin/nsqd \
+         --data-path=<%= node[:nsq][:nsqd][:data_path] %> \
+         --http-address=<%= node[:nsq][:nsqd][:http_address] %> \
+        <%- node[:nsq][:nsqd][:lookupd_tcp_address].each do |lookup_host| %>
+            --lookupd-tcp-address=<%= lookup_host %> \
+        <% end %>
+        <%- if node[:nsq][:version].start_with?("0.2.24") %>
+            --e2e-processing-latency-percentile=<%= node[:nsq][:nsqd][:e2e_processing_latency_percentile] %> \
+        <% end %>
+         --max-body-size=<%= node[:nsq][:nsqd][:max_body_size] %> \
+         --max-bytes-per-file=<%= node[:nsq][:nsqd][:max_bytes_per_file] %> \
+         --max-message-size=<%= node[:nsq][:nsqd][:max_message_size] %> \
+         --mem-queue-size=<%= node[:nsq][:nsqd][:mem_queue_size] %> \
+         --msg-timeout=<%= node[:nsq][:nsqd][:msg_timeout] %> \
+         --statsd-address=<%= node[:nsq][:nsqd][:statsd_address] %> \
+         --statsd-interval=<%= node[:nsq][:nsqd][:statsd_interval] %> \
+         --statsd-prefix=<%= node[:nsq][:nsqd][:statsd_prefix] %> \
+         --sync-every=<%= node[:nsq][:nsqd][:sync_every] %> \
+         --sync-timeout=<%= node[:nsq][:nsqd][:sync_timeout] %> \
+         --tcp-address=<%= node[:nsq][:nsqd][:tcp_address] %> \
+         --verbose=<%= node[:nsq][:nsqd][:verbose] %> \
+         --broadcast-address=<%= node[:nsq][:nsqd][:broadcast_address] %> 2>&1
+end script

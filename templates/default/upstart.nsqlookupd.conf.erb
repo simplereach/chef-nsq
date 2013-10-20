@@ -1,0 +1,24 @@
+description "nsqlookupd"
+
+start on runlevel [2345]
+stop on runlevel [!2345]
+
+env PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/sbin:/bin
+
+respawn
+
+script
+  set -e
+  mkfifo /tmp/nsqlookupd-log-fifo
+  ( logger -t nsqlookupd </tmp/nsqlookupd-log-fifo & )
+  exec >/tmp/nsqlookupd-log-fifo
+  rm /tmp/nsqlookupd-log-fifo
+
+  exec su -s /bin/sh -c 'exec "$0" "$@"' nsqlookupd -- /usr/local/bin/nsqlookupd \
+         --http-address <%= node["nsq"]["nsqlookupd"]["http_address"] %> \
+         --inactive-producer-timeout <%= node["nsq"]["nsqlookupd"]["inactive_producer_timeout"] %> \
+         --tcp-address <%= node["nsq"]["nsqlookupd"]["tcp_address"] %> \
+         --broadcast-address <%= node["nsq"]["nsqlookupd"]["broadcast_address"] %> \
+         --tombstone-lifetime <%= node["nsq"]["nsqlookupd"]["tombstone_lifetime"] %> \
+         --verbose <%= node["nsq"]["nsqlookupd"]["verbose"] %> 2>&1
+end script

@@ -1,0 +1,29 @@
+description "nsqadmin"
+
+start on runlevel [2345]
+stop on runlevel [!2345]
+
+env PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/sbin:/bin
+
+respawn
+
+script
+  set -e
+  mkfifo /tmp/nsqadmin-log-fifo
+  ( logger -t nsqadmin </tmp/nsqadmin-log-fifo & )
+  exec >/tmp/nsqadmin-log-fifo
+  rm /tmp/nsqadmin-log-fifo
+  
+  exec su -s /bin/sh -c 'exec "$0" "$@"' nsqadmin -- /usr/local/bin/nsqadmin \
+         --template-dir <%= node["nsq"]["nsqadmin"]["nsqd_template_dir"] %> \
+         <%- node["nsq"]["nsqd"]["lookupd_http_address"].each do |lookup_host| %>
+             --lookupd-http-address=<%= lookup_host %> \
+         <%- end %>
+         --use-statsd-prefixes=<%= node["nsq"]["nsqadmin"]["use_statsd_prefixes"] %> \
+         --statsd-interval=<%= node["nsq"]["nsqadmin"]["statsd_interval"] %> \
+         --proxy-graphite=<%= node["nsq"]["nsqadmin"]["proxy_graphite"] %> \
+         <% if node["nsq"]["nsqadmin"]["graphite_url"] != "" then %>
+         --graphite-url=<%= node["nsq"]["nsqadmin"]["graphite_url"] %> \
+         <% end %>
+         --http-address=<%= node["nsq"]["nsqadmin"]["http_address"] %> 2>&1
+end script
