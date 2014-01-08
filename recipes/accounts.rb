@@ -1,3 +1,12 @@
+#
+# Cookbook Name:: chef-nsq
+# Recipe:: accounts
+# Author:: Eric Lubow <elubow@simplereach.com>
+# Author:: Matt Reiferson <snakes@gmail.com>
+#
+# Description:: Set up the accounts for NSQ
+#
+
 ohai "reload_passwd" do
     action :nothing
     plugin "passwd"

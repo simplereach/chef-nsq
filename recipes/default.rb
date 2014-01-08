@@ -1,3 +1,12 @@
+#
+# Cookbook Name:: chef-nsq
+# Recipe:: default
+# Author:: Eric Lubow <elubow@simplereach.com>
+# Author:: Matt Reiferson <snakes@gmail.com>
+#
+# Description:: Download and install NSQ
+#
+
 include_recipe 'ark'
 include_recipe 'nsq::accounts'
 

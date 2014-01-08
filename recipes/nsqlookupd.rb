@@ -1,3 +1,12 @@
+#
+# Cookbook Name:: chef-nsq
+# Recipe:: nsqlookupd
+# Author:: Eric Lubow <elubow@simplereach.com>
+# Author:: Matt Reiferson <snakes@gmail.com>
+#
+# Description:: Installs nsqlookupd
+#
+
 include_recipe "nsq"
 
 nsq_release = "nsq-#{node['nsq']['version']}-#{node['nsq']['go_version']}"

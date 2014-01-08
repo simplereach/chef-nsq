@@ -1,3 +1,12 @@
+#
+# Cookbook Name:: chef-nsq
+# Recipe:: nsqadmin
+# Author:: Eric Lubow <elubow@simplereach.com>
+# Author:: Matt Reiferson <snakes@gmail.com>
+#
+# Description:: installs the NSQ Admin tool
+#
+
 include_recipe "nsq"
 
 nsq_release = "nsq-#{node['nsq']['version']}-#{node['nsq']['go_version']}"
