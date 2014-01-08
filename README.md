@@ -29,7 +29,8 @@ Roles
 -----
 There are 3 primary roles used for setting up NSQ:
 
-* nsqadmin - This role is to add nsqadmin to a host.
+#### nsqadmin - This role is to add nsqadmin to a host.
+
 ```ruby
 name 'nsqadmin'
 description 'nsqadmin'
@@ -45,7 +46,8 @@ default_attributes(
 )
 ```
 
-* nsqd - This role is add an nsqd to a host.
+#### nsqd - This role is add an nsqd to a host.
+
 ```ruby
 name 'nsqd'
 description 'nsqd'
@@ -72,7 +74,8 @@ default_attributes(
 )
 ```
 
-* nsqlookupd - This role adds an nsqlookupd instance to a host.
+#### nsqlookupd - This role adds an nsqlookupd instance to a host.
+
 ```ruby
 name "nsqlookupd'
 description 'nsqlookupd'
@@ -86,6 +89,7 @@ default_attributes(
         go_version: 'go1.1.2'
     }
 )
+```
 
 Definitions
 -----------
@@ -101,11 +105,11 @@ None
 
 Usage
 -----
+
 ### Setup
 In the environment.rb file relevant to your environment, it is useful to specify the static hostnames of your lookup nodes.  You can put these addresses in DNS to make replacement easier.
 
 ```ruby
-# NSQ Defaults
 nsq: {
   nsqd: {
     lookupd_tcp_address: (1..3).map{|i| "lookup-00#{i}.nsq.example.com:4160" },
@@ -116,6 +120,7 @@ nsq: {
 ```
 
 Once you have setup the lookup servers, you can optionally setup _nsqadmin_.  _nsqadmin_ can easily be deployed to any host with a statsd graphite host optional. These attributes can also be set in your environment.
+
 ```ruby
 nsq: {
   nsqadmin: {
