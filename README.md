@@ -77,7 +77,7 @@ default_attributes(
 #### nsqlookupd - This role adds an nsqlookupd instance to a host.
 
 ```ruby
-name "nsqlookupd'
+name 'nsqlookupd'
 description 'nsqlookupd'
 run_list(
     'recipe[nsq::nsqlookupd]'
