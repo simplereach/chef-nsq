@@ -11,7 +11,7 @@ Chef versino 0.10.10+ and Ohai 0.6.12+ are required.
 ### Platform
 * Ubuntu 12.10
 
-**Notes**: This cookbook has been tested on the listed platforms. It may work on other platforms with or without modification.
+**Notes**: This cookbook has been tested on the listed platforms only. It may work on other platforms with modification.
 
 Attributes
 ----------
@@ -59,10 +59,6 @@ default_attributes(
   nsq: {
     version: '0.2.24',
     go_version: 'go1.1.2',
-    nsqd: {
-      filehandle_limit: 65535,
-      nproc: 65535
-    }
   },
   ulimit: {
     users: {
@@ -139,4 +135,3 @@ Authors
 -------
 - Author:: Matt Reiferson <snakes@gmail.com>
 - Author:: Eric Lubow <elubow@simplereach.com>
-
