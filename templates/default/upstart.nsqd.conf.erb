@@ -29,6 +29,7 @@ script
          --max-body-size=<%= node[:nsq][:nsqd][:max_body_size] %> \
          --max-bytes-per-file=<%= node[:nsq][:nsqd][:max_bytes_per_file] %> \
          --max-message-size=<%= node[:nsq][:nsqd][:max_message_size] %> \
+         --max-rdy-count=<%= node[:nsq][:nsqd][:max_rdy_count] %> \
          --mem-queue-size=<%= node[:nsq][:nsqd][:mem_queue_size] %> \
          --msg-timeout=<%= node[:nsq][:nsqd][:msg_timeout] %> \
          --statsd-address=<%= node[:nsq][:nsqd][:statsd_address] %> \
