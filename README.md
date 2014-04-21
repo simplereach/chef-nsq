@@ -6,7 +6,7 @@ Requirements
 ------------
 
 ### Chef
-Chef versino 0.10.10+ and Ohai 0.6.12+ are required.
+Chef version 0.10.10+ and Ohai 0.6.12+ are required.
 
 ### Platform
 * Ubuntu 12.10
