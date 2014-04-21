@@ -24,6 +24,9 @@ default["nsq"]["nsqd"]["max_message_size"] = "1024768"
 # -mem-queue-size=10000: number of messages to keep in memory (per topic/channel)
 default["nsq"]["nsqd"]["mem_queue_size"] = "10000"
 
+# -mem-rdy-count=2500: maximum RDY count for a client (per topic/channel)
+default["nsq"]["nsqd"]["max_rdy_count"] = "2500"
+
 # -msg-timeout="60s": duration to wait before auto-requeing a message
 default["nsq"]["nsqd"]["msg_timeout"] = "15m0s"
 
