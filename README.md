@@ -15,6 +15,7 @@ Chef version 0.10.10+ and Ohai 0.6.12+ are required.
 
 Attributes
 ----------
+Each of the attributes come with a default setting. Read the files in the `attributes/` directory for a full description of what each setting does along with its default value.
 
 Recipes
 -------
