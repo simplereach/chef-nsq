@@ -38,6 +38,10 @@ script
          --sync-every=<%= node[:nsq][:nsqd][:sync_every] %> \
          --sync-timeout=<%= node[:nsq][:nsqd][:sync_timeout] %> \
          --tcp-address=<%= node[:nsq][:nsqd][:tcp_address] %> \
-         --verbose=<%= node[:nsq][:nsqd][:verbose] %> \
-         --broadcast-address=<%= node[:nsq][:nsqd][:broadcast_address] %> 2>&1
+         <%- if len(node[:nsq][:nsqd][:broadcast_address]) %>
+           --broadcast-address=<%= node[:nsq][:nsqd][:broadcast_address] %> \
+         <%- else %>
+           --broadcast-address=<%= node[:ipaddress] %> \
+         <%- end %>
+         --verbose=<%= node[:nsq][:nsqd][:verbose] %> 2>&1
 end script
