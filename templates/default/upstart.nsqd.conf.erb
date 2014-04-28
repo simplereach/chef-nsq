@@ -23,7 +23,7 @@ script
         <%- node[:nsq][:nsqd][:lookupd_tcp_address].each do |lookup_host| %>
             --lookupd-tcp-address=<%= lookup_host %> \
         <% end %>
-        <%- if Gem::Version.new(node[:nsq][:version]) > Gem::Version.new('0.2.24') %>
+        <%- if Semantic::Version.new(node[:nsq][:version]) > Semantic::Version.new('0.2.24') %>
             --e2e-processing-latency-percentile=<%= node[:nsq][:nsqd][:e2e_processing_latency_percentile] %> \
             --e2e-processing-latency-window-time=<%= node[:nsq][:nsqd][:e2e_processing_latency_window_time] %> \
         <% end %>

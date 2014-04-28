@@ -9,6 +9,9 @@
 
 include_recipe "nsq"
 
+chef_gem "semantic"
+require "semantic"
+
 nsq_release = "nsq-#{node['nsq']['version']}-#{node['nsq']['go_version']}"
 
 # Create path for the on-disk queue files are stored
