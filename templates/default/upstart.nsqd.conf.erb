@@ -3,8 +3,12 @@ description "nsqd"
 start on runlevel [2345]
 stop on runlevel [!2345]
 
+<% if node['nsq']['nsqd']['filehandle_limit'] -%>
 limit nofile <%= node['nsq']['nsqd']['filehandle_limit'] %> <%= node['nsq']['nsqd']['filehandle_limit'] %>
+<% end -%>
+<% if node['nsq']['nsqd']['nproc'] -%>
 limit nproc <%= node['nsq']['nsqd']['nproc'] %> <%= node['nsq']['nsqd']['nproc'] %>
+<% end -%>
 
 env PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/sbin:/bin
 
