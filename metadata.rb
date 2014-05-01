@@ -4,14 +4,13 @@ maintainer_email  "elubow@simplereach.com"
 license           "All rights reserved"
 description       "Installs/Configures nsqd, nsqlookupd, and nsqadmin"
 long_description  IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version           "1.0.7"
+version           "1.0.8"
 
 supports          "debian", ">= 6.0"
 supports          "ubuntu", ">= 10.04"
 
 depends           "ark", ">= 0.1.0"
 depends           "users", ">= 0.1.5"
-depends           "ulimit", ">= 0.2.0"
 depends           "sysctl"
 
 provides          "nsq::nsqadmin"
