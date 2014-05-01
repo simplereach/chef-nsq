@@ -9,7 +9,11 @@
 
 ohai "reload_passwd" do
     action :nothing
-    plugin "passwd"
+    if Ohai::VERSION >= '7.0.0'
+        plugin "etc"
+    else
+        plugin "passwd"
+    end
 end
 
 user "nsqd" do
