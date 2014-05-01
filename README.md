@@ -59,15 +59,8 @@ run_list(
 default_attributes(
   nsq: {
     version: '0.2.24',
-    go_version: 'go1.1.2',
-  },
-  ulimit: {
-    users: {
-      nsqd: {
-        filehandle_limit: 65535
-      }
-    }
-  },
+    go_version: 'go1.1.2'
+  }
 )
 ```
 

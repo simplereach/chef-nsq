@@ -1,5 +1,8 @@
 # https://github.com/bitly/nsq/tree/master/nsqd/README.md
 
+default["nsq"]["nsqd"]["filehandle_limit"] = node["nsq"]["nsqd"]["filehandle_limit"] || 8192
+default["nsq"]["nsqd"]["nproc"] = node["nsq"]["nsqd"]["nproc"] || node["cpu"]["total"]
+
 # -max-heartbeat-interval=1m0s: maximum duration of time between heartbeats that a client can configure
 default["nsq"]["nsqd"]["max_heartbeat_interval"] = "1m0s"
 
