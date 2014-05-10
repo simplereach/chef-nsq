@@ -17,7 +17,7 @@ ohai 'reload_passwd' do
   end
 end
 
-%w(nsqd nsqlookupd nsqadmin).eacho do |u|
+%w(nsqd nsqlookupd nsqadmin).each do |u|
   user u do
     action :create
     system true
