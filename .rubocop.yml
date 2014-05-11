@@ -1,0 +1,13 @@
+AllCops:
+  Include:
+    - ./**/*.rb
+  Exclude:
+    - vendor/**
+
+Encoding:
+  Exclude:
+    - metadata.rb
+    - Gemfile
+
+LineLength:
+  Enabled: false

@@ -124,8 +124,13 @@ nsq: {
 
 After the lookup servers are up and running, you can setup _nsqd_.  To add _nsqd_ to any host, just add the role listed above to any other host role.  This will install and setup _nsqd_ with the default attributes to listen on localhost.
 
+Testing
+-------
+
+    $ rake
 
 Authors
 -------
 - Author:: Matt Reiferson <snakes@gmail.com>
 - Author:: Eric Lubow <elubow@simplereach.com>
+- Author:: John Dewey <john@dewey.ws>

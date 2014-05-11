@@ -1,3 +1,4 @@
+# encoding: UTF-8
 #
 # Cookbook Name:: chef-nsq
 # Recipe:: accounts
@@ -7,28 +8,20 @@
 # Description:: Set up the accounts for NSQ
 #
 
-ohai "reload_passwd" do
-    action :nothing
-    if Ohai::VERSION >= '7.0.0'
-        plugin "etc"
-    else
-        plugin "passwd"
-    end
+ohai 'reload_passwd' do
+  action :nothing
+  if Ohai::VERSION >= '7.0.0'
+    plugin 'etc'
+  else
+    plugin 'passwd'
+  end
 end
 
-user "nsqd" do
+%w(nsqd nsqlookupd nsqadmin).each do |u|
+  user u do
     action :create
     system true
+  end
 end
 
-user "nsqlookupd" do
-    action :create
-    system true
-end
-
-user "nsqadmin" do
-    action :create
-    system true
-end
-
-ohai "reload_passwd"
+ohai 'reload_passwd'
