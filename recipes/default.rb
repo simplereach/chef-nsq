@@ -23,7 +23,7 @@ ark 'nsq' do
   # by adding the version to the name, this effectively fixes it
   name nsq_release
   action :install
-  has_binaries %w(bin/nsqadmin bin/nsqd bin/nsqlookupd bin/nsq_pubsub bin/nsq_stat bin/nsq_tail bin/nsq_to_file bin/nsq_to_http)
+  has_binaries %w(bin/nsqadmin bin/nsqd bin/nsqlookupd bin/nsq_pubsub bin/nsq_stat bin/nsq_tail bin/nsq_to_file bin/nsq_to_http bin/to_nsq)
   url download_url
   home_dir '/usr/local/nsq'
   only_if "test \'`/usr/local/bin/nsqd --version 2>&1`\' != \'nsqd v#{nsq_version} (built w/#{go_version})\'"
