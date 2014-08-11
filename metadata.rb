@@ -4,7 +4,7 @@ maintainer_email 'elubow@simplereach.com'
 license 'All rights reserved'
 description 'Installs/Configures nsqd, nsqlookupd, and nsqadmin'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version '1.1.1'
+version '1.1.2'
 
 supports 'debian', '>= 6.0'
 supports 'ubuntu', '>= 10.04'

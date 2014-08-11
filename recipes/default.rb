@@ -16,6 +16,14 @@ nsq_arch    = node['nsq']['arch']
 go_version  = node['nsq']['go_version']
 download_url = "https://s3.amazonaws.com/bitly-downloads/nsq/nsq-#{nsq_version}.#{nsq_arch}.#{go_version}.tar.gz"
 nsq_release = "nsq-#{nsq_version}-#{go_version}"
+nsq_binaries = %w(bin/nsqadmin bin/nsqd bin/nsqlookupd bin/nsq_pubsub bin/nsq_stat bin/nsq_tail bin/nsq_to_file bin/nsq_to_http)
+
+# Install `to_nsq` if we're using a version that includes it
+# This comparison isn't exactly correct, but should work since no one is using
+# this cookbook with a version of NSQ before 0.2.10.
+if nsq_version >= '0.2.30'
+  nsq_binaries << 'bin/to_nsq'
+end
 
 ark 'nsq' do
   # ark is broken in the case of bumping versions
@@ -23,7 +31,7 @@ ark 'nsq' do
   # by adding the version to the name, this effectively fixes it
   name nsq_release
   action :install
-  has_binaries %w(bin/nsqadmin bin/nsqd bin/nsqlookupd bin/nsq_pubsub bin/nsq_stat bin/nsq_tail bin/nsq_to_file bin/nsq_to_http)
+  has_binaries nsq_binaries
   url download_url
   home_dir '/usr/local/nsq'
   only_if "test \'`/usr/local/bin/nsqd --version 2>&1`\' != \'nsqd v#{nsq_version} (built w/#{go_version})\'"
