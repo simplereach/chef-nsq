@@ -34,5 +34,5 @@ ark 'nsq' do
   has_binaries nsq_binaries
   url download_url
   home_dir '/usr/local/nsq'
-  only_if "test \'`/usr/local/bin/nsqd --version 2>&1`\' != \'nsqd v#{nsq_version} (built w/#{go_version})\'"
+  only_if "test \"`/usr/local/bin/nsqd --version 2>&1`\" != \"nsqd v#{nsq_version} (built w/#{go_version})\""
 end
