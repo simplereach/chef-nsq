@@ -16,7 +16,17 @@ nsq_arch    = node['nsq']['arch']
 go_version  = node['nsq']['go_version']
 download_url = "https://s3.amazonaws.com/bitly-downloads/nsq/nsq-#{nsq_version}.#{nsq_arch}.#{go_version}.tar.gz"
 nsq_release = "nsq-#{nsq_version}-#{go_version}"
-nsq_binaries = %w(bin/nsqadmin bin/nsqd bin/nsqlookupd bin/nsq_pubsub bin/nsq_stat bin/nsq_tail bin/nsq_to_file bin/nsq_to_http)
+nsq_binaries = %w(
+  bin/nsqadmin
+  bin/nsqd
+  bin/nsqlookupd
+  bin/nsq_pubsub
+  bin/nsq_stat
+  bin/nsq_tail
+  bin/nsq_to_file
+  bin/nsq_to_http
+  bin/nsq_to_nsq
+)
 
 # Install `to_nsq` if we're using a version that includes it
 # This comparison isn't exactly correct, but should work since no one is using
