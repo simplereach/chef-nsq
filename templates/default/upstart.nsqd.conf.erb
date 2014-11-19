@@ -22,39 +22,39 @@ script
   rm /tmp/nsqd-log-fifo
 
   exec su -s /bin/sh -c 'exec "$0" "$@"' nsqd -- /usr/local/bin/nsqd \
-         --data-path=<%= node[:nsq][:nsqd][:data_path] %> \
-         --http-address=<%= node[:nsq][:nsqd][:http_address] %> \
-        <%- node[:nsq][:nsqd][:lookupd_tcp_address].each do |lookup_host| %>
+         --data-path=<%= node['nsq']['nsqd']['data_path'] %> \
+         --http-address=<%= node['nsq']['nsqd']['http_address'] %> \
+        <%- node['nsq']['nsqd']['lookupd_tcp_address'].each do |lookup_host| %>
             --lookupd-tcp-address=<%= lookup_host %> \
         <% end %>
-        <%- if Semantic::Version.new(node[:nsq][:version]) > Semantic::Version.new('0.2.24') %>
-            --e2e-processing-latency-percentile=<%= node[:nsq][:nsqd][:e2e_processing_latency_percentile] %> \
-            --e2e-processing-latency-window-time=<%= node[:nsq][:nsqd][:e2e_processing_latency_window_time] %> \
+        <%- if Semantic::Version.new(node['nsq']['version']) > Semantic::Version.new('0.2.24') %>
+            --e2e-processing-latency-percentile=<%= node['nsq']['nsqd']['e2e_processing_latency_percentile'] %> \
+            --e2e-processing-latency-window-time=<%= node['nsq']['nsqd']['e2e_processing_latency_window_time'] %> \
         <% end %>
-        <%- if !node[:nsq][:nsqd][:tls_key].empty? %>
-           --tls-cert=<%= node[:nsq][:nsqd][:tls_key] %>
+        <%- if !node['nsq']['nsqd']['tls_key'].empty? %>
+           --tls-cert=<%= node['nsq']['nsqd']['tls_key'] %>
         <%- end %>
-        <%- if !node[:nsq][:nsqd][:tls_cert].empty? %>
-           --tls-cert=<%= node[:nsq][:nsqd][:tls_cert] %>
+        <%- if !node['nsq']['nsqd']['tls_cert'].empty? %>
+           --tls-cert=<%= node['nsq']['nsqd']['tls_cert'] %>
         <%- end %>
-         --max-body-size=<%= node[:nsq][:nsqd][:max_body_size] %> \
-         --max-bytes-per-file=<%= node[:nsq][:nsqd][:max_bytes_per_file] %> \
-         --max-message-size=<%= node[:nsq][:nsqd][:max_message_size] %> \
-         --max-msg-timeout=<%= node[:nsq][:nsqd][:max_msg_timeout] %> \
-         --max-rdy-count=<%= node[:nsq][:nsqd][:max_rdy_count] %> \
-         --mem-queue-size=<%= node[:nsq][:nsqd][:mem_queue_size] %> \
-         --msg-timeout=<%= node[:nsq][:nsqd][:msg_timeout] %> \
-         --statsd-address=<%= node[:nsq][:nsqd][:statsd_address] %> \
-         --statsd-interval=<%= node[:nsq][:nsqd][:statsd_interval] %> \
-         --statsd-mem-stats=<%= node[:nsq][:nsqd][:statsd_mem_stats] %> \
-         --statsd-prefix=<%= node[:nsq][:nsqd][:statsd_prefix] %> \
-         --sync-every=<%= node[:nsq][:nsqd][:sync_every] %> \
-         --sync-timeout=<%= node[:nsq][:nsqd][:sync_timeout] %> \
-         --tcp-address=<%= node[:nsq][:nsqd][:tcp_address] %> \
-        <%- if !node[:nsq][:nsqd][:broadcast_address].empty? %>
-           --broadcast-address=<%= node[:nsq][:nsqd][:broadcast_address] %> \
+         --max-body-size=<%= node['nsq']['nsqd']['max_body_size'] %> \
+         --max-bytes-per-file=<%= node['nsq']['nsqd']['max_bytes_per_file'] %> \
+         --max-message-size=<%= node['nsq']['nsqd']['max_message_size'] %> \
+         --max-msg-timeout=<%= node['nsq']['nsqd']['max_msg_timeout'] %> \
+         --max-rdy-count=<%= node['nsq']['nsqd']['max_rdy_count'] %> \
+         --mem-queue-size=<%= node['nsq']['nsqd']['mem_queue_size'] %> \
+         --msg-timeout=<%= node['nsq']['nsqd']['msg_timeout'] %> \
+         --statsd-address=<%= node['nsq']['nsqd']['statsd_address'] %> \
+         --statsd-interval=<%= node['nsq']['nsqd']['statsd_interval'] %> \
+         --statsd-mem-stats=<%= node['nsq']['nsqd']['statsd_mem_stats'] %> \
+         --statsd-prefix=<%= node['nsq']['nsqd']['statsd_prefix'] %> \
+         --sync-every=<%= node['nsq']['nsqd']['sync_every'] %> \
+         --sync-timeout=<%= node['nsq']['nsqd']['sync_timeout'] %> \
+         --tcp-address=<%= node['nsq']['nsqd']['tcp_address'] %> \
+        <%- if !node['nsq']['nsqd']['broadcast_address'].empty? %>
+           --broadcast-address=<%= node['nsq']['nsqd']['broadcast_address'] %> \
         <%- else %>
-           --broadcast-address=<%= node[:ipaddress] %> \
+           --broadcast-address=<%= node['ipaddress'] %> \
         <%- end %>
-         --verbose=<%= node[:nsq][:nsqd][:verbose] %> 2>&1
+         --verbose=<%= node['nsq']['nsqd']['verbose'] %> 2>&1
 end script
