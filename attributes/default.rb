@@ -1,8 +1,8 @@
 # encoding: UTF-8
 
 # Versions
-default['nsq']['version'] = '0.2.30'
-default['nsq']['go_version'] = 'go1.3'
+default['nsq']['version'] = '0.3.0'
+default['nsq']['go_version'] = 'go1.3.3'
 
 # Architecture
 default['nsq']['arch'] = 'linux-amd64'
