@@ -13,4 +13,4 @@ default['nsq']['nsqadmin']['verbose'] = false
 default['nsq']['nsqadmin']['statsd_interval'] = '30s'
 
 # Typically set in your environment configuration
-default['nsq']['nsqd']['lookupd_tcp_address'] = ['127.0.0.1:4160']
+default['nsq']['nsqadmin']['lookupd_http_address'] = ['127.0.0.1:4161']

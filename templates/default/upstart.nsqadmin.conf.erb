@@ -16,7 +16,7 @@ script
   
   exec su -s /bin/sh -c 'exec "$0" "$@"' nsqadmin -- /usr/local/bin/nsqadmin \
          --template-dir <%= node["nsq"]["nsqadmin"]["nsqd_template_dir"] %> \
-         <%- node["nsq"]["nsqd"]["lookupd_http_address"].each do |lookup_host| %>
+         <%- node["nsq"]["nsqadmin"]["lookupd_http_address"].each do |lookup_host| %>
              --lookupd-http-address=<%= lookup_host %> \
          <%- end %>
          --use-statsd-prefixes=<%= node["nsq"]["nsqadmin"]["use_statsd_prefixes"] %> \
