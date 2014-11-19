@@ -23,18 +23,20 @@ directory node['nsq']['data_path'] do
   group 'nsqd'
 end
 
-template '/etc/init/nsqd.conf' do
-  action :create
-  source 'upstart.nsqd.conf.erb'
-  mode '0644'
-  # need to stop/start in order to reload config
-  notifies :stop, 'service[nsqd]', :immediately
-  notifies :start, 'service[nsqd]', :immediately
-end
+if node['nsq']['setup_services']
+  template '/etc/init/nsqd.conf' do
+    action :create
+    source 'upstart.nsqd.conf.erb'
+    mode '0644'
+    # need to stop/start in order to reload config
+    notifies :stop, 'service[nsqd]', :immediately
+    notifies :start, 'service[nsqd]', :immediately
+  end
 
-service 'nsqd' do
-  provider Chef::Provider::Service::Upstart
-  action [:enable, :start]
-  supports stop: true, start: true, restart: true, status: true
-  subscribes :restart, "ark[#{nsq_release}]", :delayed
+  service 'nsqd' do
+    provider Chef::Provider::Service::Upstart
+    action [:enable, :start]
+    supports stop: true, start: true, restart: true, status: true
+    subscribes :restart, "ark[#{nsq_release}]", :delayed
+  end
 end
