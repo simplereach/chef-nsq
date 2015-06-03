@@ -18,7 +18,9 @@ script
          --http-address <%= node["nsq"]["nsqlookupd"]["http_address"] %> \
          --inactive-producer-timeout <%= node["nsq"]["nsqlookupd"]["inactive_producer_timeout"] %> \
          --tcp-address <%= node["nsq"]["nsqlookupd"]["tcp_address"] %> \
-         --broadcast-address <%= node["nsq"]["nsqlookupd"]["broadcast_address"] %> \
+        <%- if !node['nsq']['nsqlookupd']['broadcast_address'].empty? %>
+           --broadcast-address <%= node["nsq"]["nsqlookupd"]["broadcast_address"] %> \
+        <%- end %>
          --tombstone-lifetime <%= node["nsq"]["nsqlookupd"]["tombstone_lifetime"] %> \
          --verbose <%= node["nsq"]["nsqlookupd"]["verbose"] %> 2>&1
 end script
