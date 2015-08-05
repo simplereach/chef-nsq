@@ -21,7 +21,7 @@ script
   exec >/tmp/nsqd-log-fifo
   rm /tmp/nsqd-log-fifo
 
-  exec su -s /bin/sh -c 'exec "$0" "$@"' nsqd -- /usr/local/bin/nsqd \
+  exec su -s /bin/sh -c 'exec "$0" "$@"' <%= node['nsq']['nsqd']['user'] %> -- /usr/local/bin/nsqd \
          --data-path=<%= node['nsq']['nsqd']['data_path'] %> \
          --http-address=<%= node['nsq']['nsqd']['http_address'] %> \
         <%- node['nsq']['nsqd']['lookupd_tcp_address'].each do |lookup_host| %>

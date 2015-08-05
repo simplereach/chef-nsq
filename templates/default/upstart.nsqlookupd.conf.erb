@@ -14,7 +14,7 @@ script
   exec >/tmp/nsqlookupd-log-fifo
   rm /tmp/nsqlookupd-log-fifo
 
-  exec su -s /bin/sh -c 'exec "$0" "$@"' nsqlookupd -- /usr/local/bin/nsqlookupd \
+  exec su -s /bin/sh -c 'exec "$0" "$@"' <%= node["nsq"]["nsqlookupd"]["user"] %> -- /usr/local/bin/nsqlookupd \
          --http-address <%= node["nsq"]["nsqlookupd"]["http_address"] %> \
          --inactive-producer-timeout <%= node["nsq"]["nsqlookupd"]["inactive_producer_timeout"] %> \
          --tcp-address <%= node["nsq"]["nsqlookupd"]["tcp_address"] %> \
