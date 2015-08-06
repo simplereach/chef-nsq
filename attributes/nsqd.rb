@@ -2,6 +2,9 @@
 
 # https://github.com/bitly/nsq/tree/master/nsqd/README.md
 
+# User to run the nsqd service as
+default['nsq']['nsqd']['user'] = 'nsqd'
+
 # -max-heartbeat-interval=1m0s: maximum duration of time between heartbeats that a client can configure
 default['nsq']['nsqd']['max_heartbeat_interval'] = '1m0s'
 

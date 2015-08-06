@@ -17,7 +17,10 @@ ohai 'reload_passwd' do
   end
 end
 
-%w(nsqd nsqlookupd nsqadmin).each do |u|
+nsqd_user = node['nsq']['nsqd']['user']
+nsqlookupd_user = node['nsq']['nsqlookupd']['user']
+nsqadmin_user = node['nsq']['nsqadmin']['user']
+[nsqd_user, nsqlookupd_user, nsqadmin_user].each do |u|
   user u do
     action :create
     system true

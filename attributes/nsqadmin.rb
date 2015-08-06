@@ -12,5 +12,8 @@ default['nsq']['nsqadmin']['use_statsd_prefixes'] = true
 default['nsq']['nsqadmin']['verbose'] = false
 default['nsq']['nsqadmin']['statsd_interval'] = '30s'
 
+# User to run the nsqadmin service as
+default['nsq']['nsqadmin']['user'] = 'nsqadmin'
+
 # Typically set in your environment configuration
 default['nsq']['nsqadmin']['lookupd_http_address'] = ['127.0.0.1:4161']

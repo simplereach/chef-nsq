@@ -13,8 +13,8 @@ script
   ( logger -t nsqadmin </tmp/nsqadmin-log-fifo & )
   exec >/tmp/nsqadmin-log-fifo
   rm /tmp/nsqadmin-log-fifo
-  
-  exec su -s /bin/sh -c 'exec "$0" "$@"' nsqadmin -- /usr/local/bin/nsqadmin \
+
+  exec su -s /bin/sh -c 'exec "$0" "$@"' <%= node["nsq"]["nsqadmin"]["user"] %> -- /usr/local/bin/nsqadmin \
          --template-dir <%= node["nsq"]["nsqadmin"]["nsqd_template_dir"] %> \
          <%- node["nsq"]["nsqadmin"]["lookupd_http_address"].each do |lookup_host| %>
              --lookupd-http-address=<%= lookup_host %> \

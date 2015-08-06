@@ -134,3 +134,4 @@ Authors
 - Author:: Matt Reiferson <snakes@gmail.com>
 - Author:: Eric Lubow <elubow@simplereach.com>
 - Author:: John Dewey <john@dewey.ws>
+- Author:: Jon Nappi <moogar0880@gmail.com>
