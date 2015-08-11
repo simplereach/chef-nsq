@@ -23,23 +23,53 @@ script
 
   exec su -s /bin/sh -c 'exec "$0" "$@"' <%= node['nsq']['nsqd']['user'] %> -- /usr/local/bin/nsqd \
          --data-path=<%= node['nsq']['nsqd']['data_path'] %> \
-         --http-address=<%= node['nsq']['nsqd']['http_address'] %> \
+        <%- if !node['nsq']['nsqd']['tls_required'] %>
+            --http-address=<%= node['nsq']['nsqd']['http_address'] %> \
+        <% end %>
         <%- node['nsq']['nsqd']['lookupd_tcp_address'].each do |lookup_host| %>
             --lookupd-tcp-address=<%= lookup_host %> \
+        <% end %>
+        <%- if Semantic::Version.new(node['nsq']['version']) > Semantic::Version.new('0.2.21') %>
+            --max-output-buffer-size=<%= node['nsq']['nsqd']['max_output_buffer_size'] %> \
+            --max-output-buffer-timeout=<%= node['nsq']['nsqd']['max_output_buffer_timeout'] %> \
+        <% end %>
+        <%- if Semantic::Version.new(node['nsq']['version']) > Semantic::Version.new('0.2.22') %>
+            --deflate=<%= node['nsq']['nsqd']['deflate'] %> \
+            --snappy=<%= node['nsq']['nsqd']['snappy'] %> \
+            --max-deflate-level=<%= node['nsq']['nsqd']['max_deflate_level'] %> \
         <% end %>
         <%- if Semantic::Version.new(node['nsq']['version']) > Semantic::Version.new('0.2.24') %>
             --e2e-processing-latency-percentile=<%= node['nsq']['nsqd']['e2e_processing_latency_percentile'] %> \
             --e2e-processing-latency-window-time=<%= node['nsq']['nsqd']['e2e_processing_latency_window_time'] %> \
         <% end %>
+        <%- if Semantic::Version.new(node['nsq']['version']) >= Semantic::Version.new('0.2.27') %>
+            --max-msg-size=<%= node['nsq']['nsqd']['max_msg_size'] %> \
+        <%- else %>
+            --max-message-size=<%= node['nsq']['nsqd']['max_message_size'] %> \
+        <%- end %>
+        <%- if Semantic::Version.new(node['nsq']['version']) > Semantic::Version.new('0.2.28') %>
+            --https-address=<%= node['nsq']['nsqd']['https_address'] %> \
+            <%- if !node['nsq']['nsqd']['tls_client_auth_policy'].empty? %>
+                --tls-client-auth-policy=<%= node['nsq']['nsqd']['tls_client_auth_policy'] %> \
+            <%- end %>
+            <%- if !node['nsq']['nsqd']['tls_root_ca_file'].empty? %>
+                --tls-root-ca-file=<%= node['nsq']['nsqd']['tls_root_ca_file'] %>
+            <%- end %>
+        <% end %>
+        <%- if Semantic::Version.new(node['nsq']['version']) >= Semantic::Version.new('0.2.29') %>
+            --max-req-timeout=<%= node['nsq']['nsqd']['max_req_timeout'] %> \
+            <%- if !node['nsq']['nsqd']['auth_http_address'].empty? %>
+                --auth-http-address=<%= node['nsq']['nsqd']['auth_http_address'] %> \
+            <%- end %>
+        <%- end %>
         <%- if !node['nsq']['nsqd']['tls_key'].empty? %>
-           --tls-cert=<%= node['nsq']['nsqd']['tls_key'] %>
+           --tls-key=<%= node['nsq']['nsqd']['tls_key'] %> \
         <%- end %>
         <%- if !node['nsq']['nsqd']['tls_cert'].empty? %>
-           --tls-cert=<%= node['nsq']['nsqd']['tls_cert'] %>
+           --tls-cert=<%= node['nsq']['nsqd']['tls_cert'] %> \
         <%- end %>
          --max-body-size=<%= node['nsq']['nsqd']['max_body_size'] %> \
          --max-bytes-per-file=<%= node['nsq']['nsqd']['max_bytes_per_file'] %> \
-         --max-message-size=<%= node['nsq']['nsqd']['max_message_size'] %> \
          --max-msg-timeout=<%= node['nsq']['nsqd']['max_msg_timeout'] %> \
          --max-rdy-count=<%= node['nsq']['nsqd']['max_rdy_count'] %> \
          --mem-queue-size=<%= node['nsq']['nsqd']['mem_queue_size'] %> \
