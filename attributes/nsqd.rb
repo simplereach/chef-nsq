@@ -5,6 +5,27 @@
 # User to run the nsqd service as
 default['nsq']['nsqd']['user'] = 'nsqd'
 
+# -auth-http-address=: <addr>:<port> to query auth server (may be given multiple times)
+default['nsq']['nsqd']['auth_http_address'] = ''
+
+# -deflate=true: enable deflate feature negotiation (client compression)
+default['nsq']['nsqd']['deflate'] = true
+
+# -max-deflate-level=6: max deflate compression level a client can negotiate (> values == > nsqd CPU usage)
+default['nsq']['nsqd']['max_deflate_level'] = '6'
+
+# -snappy=true: enable snappy feature negotiation (client compression)
+default['nsq']['nsqd']['snappy'] = true
+
+# -max-output-buffer-size=65536: maximum client configurable size (in bytes) for a client output buffer
+default['nsq']['nsqd']['max_output_buffer_size'] = '65536'
+
+# -max-output-buffer-timeout=1s: maximum client configurable duration of time between flushing to a client
+default['nsq']['nsqd']['max_output_buffer_timeout'] = '1s'
+
+# -max-req-timeout=1h0m0s: maximum requeuing timeout for a message
+default['nsq']['nsqd']['max_req_timeout'] = '1h0m0s'
+
 # -max-heartbeat-interval=1m0s: maximum duration of time between heartbeats that a client can configure
 default['nsq']['nsqd']['max_heartbeat_interval'] = '1m0s'
 
@@ -17,8 +38,20 @@ default['nsq']['nsqd']['tls_cert'] = ''
 # -tls-key='': path to tls private key file
 default['nsq']['nsqd']['tls_key'] = ''
 
+# -tls-client-auth-policy="": client certificate auth policy ('require' or 'require-verify')
+default['nsq']['nsqd']['tls_client_auth_policy'] = ''
+
+# -tls-root-ca-file="": path to private certificate authority pem
+default['nsq']['nsqd']['tls_root_ca_file'] = ''
+
+# -tls-required=false: require TLS for client connections
+default['nsq']['nsqd']['tls_required'] = false
+
 # -http-address='0.0.0.0:4151': <addr>:<port> to listen on for HTTP clients
 default['nsq']['nsqd']['http_address'] = '0.0.0.0:4151'
+
+# -https-address="": <addr>:<port> to listen on for HTTPS clients
+default['nsq']['nsqd']['https_address'] = '0.0.0.0:4152'
 
 # -lookupd-tcp-address=[]: lookupd TCP address (may be given multiple times)
 default['nsq']['nsqd']['lookupd_tcp_address'] = ['127.0.0.1:4160']
@@ -29,8 +62,11 @@ default['nsq']['nsqd']['max_body_size'] = '5123840'
 # -max-bytes-per-file=104857600: number of bytes per diskqueue file before rolling
 default['nsq']['nsqd']['max_bytes_per_file'] = '104857600'
 
-# -max-message-size=1024768: maximum size of a single message in bytes
+# -max-message-size=1024768: (deprecated (0.2.27) use --max-msg-size) maximum size of a single message in bytes
 default['nsq']['nsqd']['max_message_size'] = '1024768'
+
+# -max-msg-size=1024768: maximum size of a single message in bytes
+default['nsq']['nsqd']['max_msg_size'] = '1024768'
 
 # -mem-queue-size=10000: number of messages to keep in memory (per topic/channel)
 default['nsq']['nsqd']['mem_queue_size'] = '10000'
