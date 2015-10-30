@@ -14,7 +14,8 @@ include_recipe 'nsq::accounts'
 nsq_version = node['nsq']['version']
 nsq_arch    = node['nsq']['arch']
 go_version  = node['nsq']['go_version']
-download_url = "https://s3.amazonaws.com/bitly-downloads/nsq/nsq-#{nsq_version}.#{nsq_arch}.#{go_version}.tar.gz"
+release_url = node['nsq']['release_url']
+download_url = "#{release_url}/nsq-#{nsq_version}.#{nsq_arch}.#{go_version}.tar.gz"
 nsq_release = "nsq-#{nsq_version}-#{go_version}"
 nsq_binaries = %w(
   bin/nsqadmin
