@@ -30,7 +30,7 @@ default['nsq']['nsqd']['max_req_timeout'] = '1h0m0s'
 default['nsq']['nsqd']['max_heartbeat_interval'] = '1m0s'
 
 # -data-path='': path to store disk-backed messages
-default['nsq']['nsqd']['data_path'] = default['nsq']['data_path']
+default['nsq']['nsqd']['data_path'] = '/var/spool/nsq'
 
 # -tls-cert='': path to tls certificate file
 default['nsq']['nsqd']['tls_cert'] = ''

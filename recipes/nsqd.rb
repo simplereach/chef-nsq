@@ -16,7 +16,7 @@ require 'semantic'
 nsq_release = "nsq-#{node['nsq']['version']}-#{node['nsq']['go_version']}"
 
 # Create path for the on-disk queue files are stored
-directory node['nsq']['data_path'] do
+directory node['nsq']['nsqd']['data_path'] do
   action :create
   mode '0770'
   owner 'nsqd'
