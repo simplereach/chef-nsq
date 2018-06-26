@@ -1,10 +1,13 @@
 name 'nsq'
 maintainer 'SimpleReach'
-maintainer_email 'elubow@simplereach.com'
-license 'All rights reserved'
+maintainer_email 'rbradberry@simplereach.com'
+license 'Apache-2.0'
 description 'Installs/Configures nsqd, nsqlookupd, and nsqadmin'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version '1.2.3'
+issues_url 'https://github.com/simplereach/chef-nsq/issues'
+source_url 'https://github.com/simplereach/chef-nsq'
+chef_version '11.18.6'
 
 supports 'debian', '>= 6.0'
 supports 'ubuntu', '>= 10.04'

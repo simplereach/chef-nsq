@@ -35,11 +35,7 @@ if nsq_version >= '0.2.30'
   nsq_binaries << 'bin/to_nsq'
 end
 
-ark 'nsq' do
-  # ark is broken in the case of bumping versions
-  # (it continues to use a cached download)
-  # by adding the version to the name, this effectively fixes it
-  name nsq_release
+ark nsq_release do
   action :install
   has_binaries nsq_binaries
   url download_url
